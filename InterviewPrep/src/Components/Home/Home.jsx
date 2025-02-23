@@ -1,8 +1,11 @@
 import React from 'react'
 import homeSvg from './home.svg';
 import {NavLink} from 'react-router-dom';
+import Feature from './Feature';
+import Feature1 from './Feature1';
 export default function Home() {
   return (
+    <>
     <div className="flex items-center justify-center h-screen bg-gray-100 px-8">
       <div className="max-w-6xl w-full flex flex-col md:flex-row items-center gap-12">
         
@@ -32,5 +35,9 @@ export default function Home() {
 
       </div>
     </div>
+    
+    <Feature1 />
+    <hr className="border-t border-gray-500 my-4" />
+    </>
   );
 }
