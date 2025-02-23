@@ -1,7 +1,6 @@
 import React from 'react'
 import homeSvg from './home.svg';
 import {NavLink} from 'react-router-dom';
-import Feature from './Feature';
 import Feature1 from './Feature1';
 export default function Home() {
   return (
