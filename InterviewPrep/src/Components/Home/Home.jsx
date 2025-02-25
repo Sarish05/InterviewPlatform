@@ -2,6 +2,7 @@ import React from 'react'
 import homeSvg from './home.svg';
 import {NavLink} from 'react-router-dom';
 import Feature1 from './Feature1';
+import Company from './Company';
 export default function Home() {
   return (
     <>
@@ -34,7 +35,7 @@ export default function Home() {
 
       </div>
     </div>
-    
+    <Company />
     <Feature1 />
     <hr className="border-t border-gray-500 my-4" />
     </>
