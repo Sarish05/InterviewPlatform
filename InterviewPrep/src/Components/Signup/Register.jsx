@@ -107,7 +107,7 @@ function Register() {
                 </div>
 
                 <p className='text-sm mt-4'>
-                    Already have an account? <span onClick={() => navigate('/')} className='font-semibold underline cursor-pointer'>Log in</span>
+                    Already have an account? <span onClick={() => navigate('/login')} className='font-semibold underline cursor-pointer'>Log in</span>
                 </p>
             </div>
 
