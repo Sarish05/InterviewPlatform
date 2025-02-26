@@ -42,8 +42,8 @@ export default function Header() {
                 </div>
                 {/* login */}
                 <div className='flex items-center justify-between space-x-8 min-w-30'>
-                    <Link to= "/signup" className='mt-2 border-white border p-2 rounded-lg bg-indigo-100 outline outline-offset-2 outline-indigo-400'>Sign Up</Link>
-                    <Link to= "/signup" className='mt-2 border-white border p-2 rounded-lg bg-white outline outline-offset-2 outline-indigo-400'>Log in</Link>
+                    <Link to= "/register" className='mt-2 border-white border p-2 rounded-lg bg-indigo-100 outline outline-offset-2 outline-indigo-400'>Sign Up</Link>
+                    <Link to= "/login" className='mt-2 border-white border p-2 rounded-lg bg-white outline outline-offset-2 outline-indigo-400'>Log in</Link>
                 </div>
 
             </nav>
