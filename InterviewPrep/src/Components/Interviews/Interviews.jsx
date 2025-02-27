@@ -17,12 +17,12 @@ function Interviews() {
   const interviewsData = [
     { type: "Technical", date: "Feb 8, 2025", duration: "28m", status: "Completed", score: "9.5/10" },
     { type: "Behavioural", date: "Feb 16, 2025", duration: "32m", status: "Review", score: "8.7/10" },
-    { type: "Mock Test", date: "Feb 24, 2025", duration: "20m", status: "Completed", score: "9.1/10" },
-    { type: "Coding", date: "Feb 5, 2025", duration: "45m", status: "Completed", score: "8.9/10" },
-    { type: "System Design", date: "Feb 12, 2025", duration: "50m", status: "Completed", score: "9.2/10" },
-    { type: "Leadership", date: "Jan 29, 2025", duration: "34m", status: "Review", score: "8.5/10" },
+    { type: "System Design Test", date: "Feb 24, 2025", duration: "20m", status: "Completed", score: "9.1/10" },
+    { type: "OOP Test", date: "Feb 5, 2025", duration: "45m", status: "Completed", score: "8.9/10" },
+    { type: "DSA Test", date: "Feb 12, 2025", duration: "50m", status: "Completed", score: "9.2/10" },
+    { type: "Behavioural", date: "Jan 29, 2025", duration: "34m", status: "Review", score: "8.5/10" },
     { type: "Technical", date: "Jan 22, 2025", duration: "30m", status: "Completed", score: "9.0/10" },
-    { type: "Mock Test", date: "Jan 18, 2025", duration: "25m", status: "Completed", score: "8.8/10" }
+    { type: "CN Test", date: "Jan 18, 2025", duration: "25m", status: "Completed", score: "8.8/10" }
   ];
 
   return (
