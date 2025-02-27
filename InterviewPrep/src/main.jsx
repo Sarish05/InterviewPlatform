@@ -13,6 +13,7 @@ import Reports from './Components/Reports/Reports.jsx'
 import Settings from './Components/Settings/Settings.jsx'
 import Interviews from './Components/Interviews/Interviews.jsx'
 import Profile from './Components/Profile/Profile.jsx'
+import Questions from './Components/Questions/Questions.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,7 +27,7 @@ const router = createBrowserRouter(
     <Route path = "reports" element = {<Reports/>} />
     <Route path = "settings" element = {<Settings/>} />
     <Route path = "interviews" element = {<Interviews/>}/>
-    <Route path = "interviews" element = {<Interviews/>}/>
+    <Route path = "questions" element = {<Questions/>}/>
     <Route path = "profile" element = {<Profile />}></Route>
     <Route path = "login" element = {<Login/>}></Route>
     <Route path = "register" element = {<Register/>}></Route>

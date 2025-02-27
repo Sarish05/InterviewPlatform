@@ -176,7 +176,7 @@ function Interviews() {
                       <th className="text-start px-4 py-3">Duration</th>
                       <th className="text-start px-4 py-3">Status</th>
                       <th className="text-start px-4 py-3">Score</th>
-                      <th className="text-start px-4 py-3">Report</th>
+                      <th className="text-start px-4 py-3 flex items-center justify-center">Report</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -196,7 +196,7 @@ function Interviews() {
                           </span>
                         </td>
                         <td className="text-start px-4 py-3 font-medium">{interview.score}</td>
-                        <td className="text-start px-4 py-3">
+                        <td className="text-start px-4 py-3  flex items-center justify-center">
                           <button className="text-indigo-600 hover:text-indigo-800 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
                               <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />

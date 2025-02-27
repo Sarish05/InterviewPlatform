@@ -18,7 +18,7 @@ export default function Home() {
             Get real-time feedback, mock interviews, and track your progress with AI-powered insights.
           </p>
           <br />
-          <NavLink to= '/signup' className="mt-6 px-6 py-3 bg-indigo-600 text-white font-semibold text-lg rounded-lg shadow-md hover:bg-blue-700 transition">
+          <NavLink to= '/signup' className="mt-6 px-6 py-3 bg-black text-white font-semibold text-lg rounded-lg shadow-md hover:bg-blue-700 transition">
             Get Started
           </NavLink>
         </div>
