@@ -126,7 +126,7 @@ function Interviews() {
                 <p className="font-poppins text-sm text-gray-500">View and manage all your interview sessions</p>
               </div>
               <div>
-                <NavLink to="/interviews" className="border-solid bg-black text-white rounded-3xl px-4 py-2 flex justify-center items-center text-sm">
+                <NavLink to="/tech-select" className="border-solid bg-black text-white rounded-3xl px-4 py-2 flex justify-center items-center text-sm">
                   Give new Interview
                 </NavLink>
               </div>

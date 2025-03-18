@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 function Dashboard() {
+  
   // State to track sidebar visibility
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
