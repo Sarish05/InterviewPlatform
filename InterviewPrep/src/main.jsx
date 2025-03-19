@@ -23,6 +23,7 @@ import ForgotPassword from "./Components/Signup/ForgotPassword";
 import ResetPassword from "./Components/Signup/ResetPassword";
 import TopicSelection from './Components/TechTest/TopicSelection.jsx'
 import TestPage from "./Components/TechTest/TestPage";
+import InterviewSelection from './Components/InterviewSelect/InterviewSelection.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -46,6 +47,7 @@ const router = createBrowserRouter(
     <Route path="reset-password/:token" element={<ResetPassword />} />
     <Route path="tech-select" element ={<TopicSelection />}/>
     <Route path = "tech-mcq-test" element={<TestPage />}/>
+    <Route path= "interview-selection" element={<InterviewSelection/>}/>
     </>
   )
 )

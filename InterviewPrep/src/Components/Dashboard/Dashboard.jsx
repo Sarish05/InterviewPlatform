@@ -1,13 +1,32 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import bell from './bell.png'
 import boy from './boy.png'
 import { NavLink } from 'react-router-dom'
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { motion, AnimatePresence } from "framer-motion";
+
+
 
 function Dashboard() {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [user, setUser] = useState({ username: "", profilePhoto: "" });
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (storedUser) {
+      setUser({
+        username: storedUser.name,  // Extract name
+        profilePhoto: storedUser.image || {boy},  // Extract profile image
+      });
+    }
+  }, []);
   
   // State to track sidebar visibility
   const [sidebarOpen, setSidebarOpen] = useState(true);
+
 
   // Toggle sidebar function
   const toggleSidebar = () => {
@@ -103,20 +122,65 @@ function Dashboard() {
                     </div>
                     {/* notify and profile */}
                     <div className='flex items-center gap-4 px-4'>
-                        <button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
-                          <path d="M5.85 3.5a.75.75 0 0 0-1.117-1 9.719 9.719 0 0 0-2.348 4.876.75.75 0 0 0 1.479.248A8.219 8.219 0 0 1 5.85 3.5ZM19.267 2.5a.75.75 0 1 0-1.118 1 8.22 8.22 0 0 1 1.987 4.124.75.75 0 0 0 1.48-.248A9.72 9.72 0 0 0 19.266 2.5Z" />
-                          <path fillRule="evenodd" d="M12 2.25A6.75 6.75 0 0 0 5.25 9v.75a8.217 8.217 0 0 1-2.119 5.52.75.75 0 0 0 .298 1.206c1.544.57 3.16.99 4.831 1.243a3.75 3.75 0 1 0 7.48 0 24.583 24.583 0 0 0 4.83-1.244.75.75 0 0 0 .298-1.205 8.217 8.217 0 0 1-2.118-5.52V9A6.75 6.75 0 0 0 12 2.25ZM9.75 18c0-.034 0-.067.002-.1a25.05 25.05 0 0 0 4.496 0l.002.1a2.25 2.25 0 1 1-4.5 0Z" clipRule="evenodd" />
-                        </svg>
-                        </button>
-                        <NavLink to= "/profile"><img src={boy} alt="boy" className='h-7'/></NavLink>
-                        
+                        {/* Notification Bell Icon */}
+        <button>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-black">
+            <path d="M5.85 3.5a.75.75 0 0 0-1.117-1 9.719 9.719 0 0 0-2.348 4.876.75.75 0 0 0 1.479.248A8.219 8.219 0 0 1 5.85 3.5ZM19.267 2.5a.75.75 0 1 0-1.118 1 8.22 8.22 0 0 1 1.987 4.124.75.75 0 0 0 1.48-.248A9.72 9.72 0 0 0 19.266 2.5Z" />
+            <path fillRule="evenodd" d="M12 2.25A6.75 6.75 0 0 0 5.25 9v.75a8.217 8.217 0 0 1-2.119 5.52.75.75 0 0 0 .298 1.206c1.544.57 3.16.99 4.831 1.243a3.75 3.75 0 1 0 7.48 0 24.583 24.583 0 0 0 4.83-1.244.75.75 0 0 0 .298-1.205 8.217 8.217 0 0 1-2.118-5.52V9A6.75 6.75 0 0 0 12 2.25ZM9.75 18c0-.034 0-.067.002-.1a25.05 25.05 0 0 0 4.496 0l.002.1a2.25 2.25 0 1 1-4.5 0Z" clipRule="evenodd" />
+          </svg>
+        </button>
+
+        {/* Profile Image (Click to Toggle Menu) */}
+        <button onClick={() => setIsOpen(!isOpen)}>
+          <img
+            src={user.profilePhoto}
+            alt="User"
+            className="h-9 rounded-xl cursor-pointer border-2 border-white"
+          />
+        </button>
+
+        {/* Dropdown Menu (Position Adjusted) */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10}}
+              animate={{ opacity: 1, y: 18 }}
+              exit={{ opacity: 0, y: -1 }}
+              className="absolute top-12 right-4 bg-white shadow-lg rounded-lg w-[180px] max-w-[200px] py-2 z-50"
+            >
+              <NavLink
+                to="/profile"
+                className="block px-4 py-2 hover:bg-gray-200 text-gray-700"
+                onClick={() => setIsOpen(false)}
+              >
+                My Profile
+              </NavLink>
+              <NavLink
+                to="/settings"
+                className="block px-4 py-2 hover:bg-gray-200 text-gray-700"
+                onClick={() => setIsOpen(false)}
+              >
+                Settings
+              </NavLink>
+              <button
+                className="w-full text-left px-4 py-2 hover:bg-gray-200 text-red-600"
+                onClick={() => {
+                  localStorage.removeItem("user"); // Clear user data
+                  window.location.href = "/login"; // Redirect to login
+                }}
+              >
+                Sign Out
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
                     </div>
                 </div>
 
            {/* Welcome */}
           <div className="mb-6 flex justify-between mr-16">
             <div>
-            <div className='font-poppins text-base font-semibold'>Welcome Back UserX !</div>
+            <div className='font-poppins text-base font-semibold'>Welcome Back  <span className="text-black">{user.username}</span> !</div>
             <div className='font-poppins text-sm'>Here's your Interview dashboard overview</div>
             </div>
             <div>
