@@ -16,15 +16,14 @@ const companies = [
 
 const Company = () => {
   return (
-    <div className="overflow-hidden bg-[#cfcfed] relative max-w-[2000px] mx-auto pt-[160px] pb-[160px] py-4">
-        <motion.h2 className="mx-auto font-poppins text-center max-w-[840px] min-w-[300px] leading-[1.3] tracking-[0.17px] mb-24  text-[#040348]" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }}>
+    <div className="overflow-hidden bg-gray-100 relative max-w-[2000px] mx-auto pt-[120px] pb-[120px] py-4">
+        <motion.h2 className="mx-auto font-poppins text-center max-w-[840px] min-w-[300px] leading-[1.3] tracking-[0.17px] mb-16 text-gray-900" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }}>
          PrepX has helped countless candidates land jobs at their dream companies
-
         </motion.h2>
         
       
         <div className="relative flex whitespace-nowrap">
-          <motion.div className="flex space-x-10 text-white text-lg font-semibold" animate={{ x: [0, -1000] }} transition={{ repeat: Infinity, duration: 12, ease: "linear" }}>
+          <motion.div className="flex space-x-10 text-gray-900 text-lg font-semibold" animate={{ x: [0, -1000] }} transition={{ repeat: Infinity, duration: 12, ease: "linear" }}>
             {companies.concat(companies).map((company, index) => (
               <motion.img key={index} src={company.logo} alt={company.name} className="h-10 mx-5" whileHover={{ scale: 1.2 }} transition={{ duration: 0.3 }}/>
             ))}

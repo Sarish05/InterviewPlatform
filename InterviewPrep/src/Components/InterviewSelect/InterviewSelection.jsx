@@ -1,87 +1,138 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import beh from './behavioural_icon.jpg';
 import moc from './mock2_icon.jpg';
 import tec from './technical_icon.jpg';
-import "tailwindcss/tailwind.css";
-
-
-
 
 const InterviewSelection = () => {
   const navigate = useNavigate();
+  
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+  
+  const itemVariants = {
+    hidden: { y: 50, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: { 
+        type: "spring",
+        stiffness: 100,
+        damping: 15
+      }
+    }
+  };
+
+  const interviewTypes = [
+    {
+      title: "Behavioural Interview",
+      image: beh,
+      description: "Prepare for behavioural interviews with tailored practice questions and guidance.",
+      navigateTo: "/behavioural-select" // Add the correct path if it exists
+    },
+    {
+      title: "Technical Interview",
+      image: tec,
+      description: "Sharpen your technical skills with mock interviews and coding challenges.",
+      navigateTo: "/tech-select"
+    },
+    {
+      title: "Mock Test",
+      image: moc,
+      description: "Take full-length mock tests to simulate a real interview environment.",
+      navigateTo: "/quant-select"
+    }
+  ];
 
   return (
-    <div className="flex flex-col items-center min-h-screen p-8 bg-gradient-to-r from-gray-900 via-gray-700 to-gray-500 animate-gradient">
-      <h1 className="text-3xl font-bold text-center mb-8 text-white">Select Your Interview Type</h1>
-      <div className="grid grid-cols-3 gap-8">
-        {/* Behavioural Interview */}
-        <div className="flex flex-col items-center bg-white rounded-xl p-6 shadow-md transform transition duration-300 hover:scale-105">
-          <div className="mb-4">
-            <img
-              src= {beh}
-              alt="Behavioural Interview"
-              className="w-40 h-40 rounded-full border-4 border-black p-4"
-            />
-          </div>
-          <h3 className="text-xl font-semibold text-black">Behavioural Interview</h3>
-          <p className="text-center mt-2 px-6 text-gray-700">
-            Prepare for behavioural interviews with tailored practice questions and guidance.
-          </p>
-          <button className="mt-4 bg-gray-800 text-white font-semibold px-6 py-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-110 hover:bg-gray-600">
-            Select
+    <motion.div 
+      className="min-h-screen bg-gray-50 py-16 px-4 sm:px-6 lg:px-8"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <div className="max-w-7xl mx-auto">
+        <motion.h1 
+          className="text-4xl font-bold text-center mb-4 text-gray-900"
+          variants={itemVariants}
+        >
+          Select Your Interview Type
+        </motion.h1>
+        
+        <motion.p 
+          className="text-center text-gray-600 mb-12 max-w-2xl mx-auto"
+          variants={itemVariants}
+        >
+          Choose the type of interview you want to practice and get real-time feedback from our AI system
+        </motion.p>
+        
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          variants={containerVariants}
+        >
+          {interviewTypes.map((type, index) => (
+            <motion.div 
+              key={index}
+              className="flex flex-col items-center bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 transition-all duration-300 hover:shadow-xl"
+              variants={itemVariants}
+              whileHover={{ y: -10 }}
+            >
+              <div className="relative w-full h-48 overflow-hidden">
+                <div className="absolute inset-0 bg-black/40 z-10"></div>
+                <img
+                  src={type.image}
+                  alt={type.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 z-20 flex items-center justify-center">
+                  <div className="w-24 h-24 rounded-full bg-white/90 flex items-center justify-center p-2">
+                    <img
+                      src={type.image}
+                      alt={type.title}
+                      className="w-full h-full rounded-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              <div className="px-6 py-8 flex-1 flex flex-col items-center">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{type.title}</h3>
+                <p className="text-center text-gray-600 mb-6 flex-1">
+                  {type.description}
+                </p>
+                <button 
+                  onClick={() => navigate(type.navigateTo)}
+                  className="px-6 py-3 bg-black text-white font-medium rounded-lg shadow-sm transition-colors hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+                >
+                  Select
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+        
+        <motion.div 
+          className="text-center mt-16"
+          variants={itemVariants}
+        >
+          <p className="text-gray-600 mb-4">Not sure which type to choose?</p>
+          <button 
+            className="px-6 py-3 bg-gray-100 text-gray-900 font-medium rounded-lg border border-gray-300 hover:bg-gray-200 transition-colors"
+            onClick={() => navigate("/dashboard")}
+          >
+            Return to Dashboard
           </button>
-        </div>
-
-        {/* Technical Interview */}
-        <div className="flex flex-col items-center bg-white rounded-xl p-6 shadow-md transform transition duration-300 hover:scale-105">
-          <div className="mb-4">
-            <img
-              src={tec}
-              alt="Technical Interview"
-              className="w-40 h-40 rounded-full border-4 border-black p-4"
-            />
-          </div>
-          <h3 className="text-xl font-semibold text-black">Technical Interview</h3>
-          <p className="text-center mt-2 px-6 text-gray-700">
-            Sharpen your technical skills with mock interviews and coding challenges.
-          </p>
-          <button onClick={() => navigate("/tech-select")} className="mt-4 bg-gray-800 text-white font-semibold px-6 py-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-110 hover:bg-gray-600">
-            Select
-          </button>
-        </div>
-
-        {/* Mock Test */}
-        <div className="flex flex-col items-center bg-white rounded-xl p-6 shadow-md transform transition duration-300 hover:scale-105">
-          <div className="mb-4">
-            <img
-              src={moc}
-              alt="Mock Test"
-              className="w-40 h-40 rounded-full border-4 border-black p-4"
-            />
-          </div>
-          <h3 className="text-xl font-semibold text-black">Mock Test</h3>
-          <p className="text-center mt-2 px-6 text-gray-700">
-            Take full-length mock tests to simulate a real interview environment.
-          </p>
-          <button  onClick={() => navigate("/quant-select")} className="mt-4 bg-gray-800 text-white font-semibold px-6 py-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-110 hover:bg-gray-600">
-            Select
-          </button>
-        </div>
+        </motion.div>
       </div>
-      
-      <style jsx>{`
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-gradient {
-          background-size: 400% 400%;
-          animation: gradient 10s infinite linear;
-        }
-      `}</style>
-    </div>
+    </motion.div>
   );
 };
 
