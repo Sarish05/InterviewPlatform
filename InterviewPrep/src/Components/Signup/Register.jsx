@@ -118,7 +118,7 @@ function Register() {
 
             <div className="w-1/2 h-full bg-white flex flex-col p-14 justify-center items-center">
                 <h1 className="max-w-[500px] text-xl text-[#060606] font-semibold mr-auto mb-8">
-                    💀 AI Based Interview Platform
+                    PrepX
                 </h1>
 
                 <div className="w-full flex flex-col max-w-[400px]">

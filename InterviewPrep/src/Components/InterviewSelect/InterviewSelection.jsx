@@ -48,7 +48,7 @@ const InterviewSelection = () => {
       title: "Mock Test",
       image: moc,
       description: "Take full-length mock tests to simulate a real interview environment.",
-      navigateTo: "/quant-select"
+      navigateTo: "/comprehensive-select"
     }
   ];
 
