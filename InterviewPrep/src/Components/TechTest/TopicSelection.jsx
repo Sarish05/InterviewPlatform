@@ -1,16 +1,13 @@
-import React, { useState,useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Navigate to Test Page
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import img_con from "./pat.png";
-import useAuthCheck from "../utils/useAuthCheck";
+import { AnimatePresence } from "framer-motion";
+import { NavLink } from "react-router-dom"; 
 
 function TopicSelection() {
-
-    
-    /* useAuthCheck(); */
-
-
     const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false); 
     const topics = [
         "Data Structures",
         "Algorithms",
@@ -22,6 +19,24 @@ function TopicSelection() {
     ];
 
     const [selectedTopics, setSelectedTopics] = useState([]);
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+        const storedToken = localStorage.getItem("token");
+
+        if (storedUser || storedToken) {
+            try {
+                const parsedUser = JSON.parse(storedUser);
+                setUser(parsedUser);
+            } catch (error) {
+                console.error("Error parsing user data:", error);
+                navigate("/login");
+            }
+        } else {
+            navigate("/login");
+        }
+    }, [navigate]);
 
     const handleTopicChange = (topic) => {
         setSelectedTopics(prev =>
@@ -34,30 +49,8 @@ function TopicSelection() {
             alert("Please select at least one topic.");
             return;
         }
-        navigate("/tech-mcq-test", { state: { selectedTopics } }); // Pass topics to TestPage
+        navigate("/tech-mcq-test", { state: { selectedTopics } });
     };
-
-    
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        const storedUser = localStorage.getItem("user");
-        const storedToken = localStorage.getItem("token");
-
-        if (storedUser || storedToken) {
-            try {
-                const parsedUser = JSON.parse(storedUser);
-                console.log("User Data from LocalStorage:", parsedUser); 
-                setUser(parsedUser);
-            } catch (error) {
-                console.error("Error parsing user data:", error);
-                navigate("/login"); 
-            }
-        } else {
-            console.log("No user found, redirecting to login...");
-            navigate("/login");
-        }
-    }, [navigate]);
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -66,37 +59,114 @@ function TopicSelection() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 p-6">
-            <div className="bg-white border-b border-gray-300 flex items-center justify-between px-10 py-4">
-                <h1 className="font-semibold text-lg">AI-Based Interview Platform</h1>
+        <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            transition={{ duration: 0.5 }}
+            className="min-h-screen bg-gray-100 p-6"
+        >
+            <motion.div 
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="bg-white border-b border-gray-300 flex items-center justify-between px-10 py-4"
+            >
+                <h1 className="font-semibold text-lg">PrepX</h1>
                 <div className="flex items-center gap-x-6">
-                    <img src={img_con} alt="Profile" className="w-10 h-10 rounded-full bg-gray-300" />
-                    <button onClick={handleLogout} className="bg-black text-white text-[16px] px-4 py-2 rounded">Sign Out</button>
-                </div>
-            </div>
 
-            <div className="bg-white border border-gray-300 p-6 mx-10 mt-6 rounded-xl shadow-sm">
+                    <motion.div className="relative">
+                        <button onClick={() => setIsOpen(!isOpen)}>
+                            <motion.img
+                            src={user?.image || img_con}  // Use Google profile photo or fallback
+                            alt="User"
+                            className="h-10 w-10 rounded-full cursor-pointer border-2 border-white object-cover"
+                            whileHover={{ scale: 1.1 }}
+                            />
+                        </button>
+
+                        {/* Animated Dropdown Menu */}
+                        <AnimatePresence>
+                            {isOpen && (
+                            <motion.div
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 18 }}
+                                exit={{ opacity: 0, y: -1 }}
+                                className="absolute top-12 right-0 bg-white shadow-lg rounded-lg w-[180px] py-2 z-50"
+                            >
+                                <NavLink
+                                to="/profile"
+                                className="block px-4 py-2 hover:bg-gray-200 text-gray-700"
+                                onClick={() => setIsOpen(false)}
+                                >
+                                My Profile
+                                </NavLink>
+                                <NavLink
+                                to="/settings"
+                                className="block px-4 py-2 hover:bg-gray-200 text-gray-700"
+                                onClick={() => setIsOpen(false)}
+                                >
+                                Settings
+                                </NavLink>
+                                <button
+                                className="w-full text-left px-4 py-2 hover:bg-gray-200 text-red-600"
+                                onClick={
+                                    handleLogout
+                                }
+                                >
+                                Sign Out
+                                </button>
+                            </motion.div>
+                            )}
+                        </AnimatePresence>
+                        </motion.div>
+                </div>
+            </motion.div>
+
+            <motion.div 
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="bg-white border border-gray-300 p-6 mx-10 mt-6 rounded-xl shadow-sm"
+            >
                 <h2 className="text-lg font-semibold mb-4">Select Topics</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {topics.map((topic, index) => (
-                        <label key={index} className="flex items-center border border-gray-300 rounded-md px-4 py-3 cursor-pointer">
-                            <input type="checkbox" checked={selectedTopics.includes(topic)}
-                                onChange={() => handleTopicChange(topic)} className="w-4 h-4 mr-2"/>
+                        <motion.label 
+                            key={index} 
+                            className="flex items-center border border-gray-300 rounded-md px-4 py-3 cursor-pointer"
+                            whileHover={{ scale: 1.05 }}
+                        >
+                            <input 
+                                type="checkbox" 
+                                checked={selectedTopics.includes(topic)}
+                                onChange={() => handleTopicChange(topic)} 
+                                className="w-4 h-4 mr-2"
+                            />
                             <span>{topic}</span>
-                        </label>
+                        </motion.label>
                     ))}
                 </div>
-            </div>
+            </motion.div>
 
             <div className="flex justify-center gap-x-4 mt-6">
-                <button onClick={() => setSelectedTopics([])} className="border border-gray-400 text-gray-600 px-6 py-2 rounded-md">
+                <motion.button 
+                    onClick={() => setSelectedTopics([])} 
+                    className="border border-gray-400 text-gray-600 px-6 py-2 rounded-md"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                >
                     Reset Selection
-                </button>
-                <button onClick={handleStartTest} className="bg-black text-white px-6 py-2 rounded-md">
+                </motion.button>
+                <motion.button 
+                    onClick={handleStartTest} 
+                    className="bg-black text-white px-6 py-2 rounded-md"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                >
                     Start Mock Interview
-                </button>
+                </motion.button>
             </div>
-        </div>
+        </motion.div>
     );
 }
 
