@@ -36,7 +36,7 @@ const InterviewSelection = () => {
       title: "Behavioural Interview",
       image: beh,
       description: "Prepare for behavioural interviews with tailored practice questions and guidance.",
-      navigateTo: "/behavioural-interview"
+      navigateTo: "/behavioural-select" // Add the correct path if it exists
     },
     {
       title: "Technical Interview",
