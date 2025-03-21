@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { ArrowLeft, Download, Award, Clock, Mic, BarChart2, Lightbulb } from "lucide-react";
 
 const Results = () => {
@@ -109,7 +109,7 @@ const Results = () => {
   };
 
   const goBack = () => {
-    navigate("dashboard");
+    navigate("/");
   };
 
   if (loading) {
@@ -425,14 +425,14 @@ const Results = () => {
             <Download size={18} />
             Download Full Report
           </button>
-          
+          <NavLink to="/dashboard">
           <button
-            onClick={goBack}
             className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors"
           >
             <ArrowLeft size={18} />
             Back to Dashboard
           </button>
+          </NavLink>
         </div>
       </main>
     </div>
