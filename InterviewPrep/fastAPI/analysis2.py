@@ -101,7 +101,7 @@ def convert_audio_to_wav(audio_bytes):
         print(f"Error in convert_audio_to_wav: {str(e)}")
         raise Exception(f"Failed to convert audio: {str(e)}")
 
-config = pdfkit.configuration(wkhtmltopdf=r'C:\Users\saris\Downloads\wkhtmltox-0.12.6-1.mxe-cross-win64\wkhtmltox\bin\wkhtmltopdf.exe')
+config = pdfkit.configuration(wkhtmltopdf='/usr/local/bin/wkhtmltopdf')
 
 app = FastAPI()
 
